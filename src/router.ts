@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-
 Vue.use(Router)
-
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -14,12 +12,34 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/deviceManagement',
+      name: 'deviceManagement',
+      component: () => import('./views/deviceManagement.vue'),
+      redirect:'/deviceManagement/safe',
+      children:[
+          {
+              path:'safe',
+              component:()=>import('./components/deviceManage/safe.vue')
+          },{
+              path:"alar",
+              component:()=>import('./components/deviceManage/alar.vue')
+          },{
+              path:'dict',
+              component:()=>import('./components/deviceManage/dict.vue')
+          },{
+              path:'equinf',
+              component:()=>import('./components/deviceManage/equinf.vue')
+          },{
+              path:"equout",
+              component:()=>import('./components/deviceManage/equout.vue')
+          },{
+              path:"para",
+              component:()=>import('./components/deviceManage/para.vue')
+          },{
+              path:'prot',
+              component:()=>import('./components/deviceManage/prot.vue')
+          }
+      ]
     }
   ]
 })
